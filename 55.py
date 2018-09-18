@@ -7,7 +7,14 @@ from string import punctuation
 
 
 def anagrams(input_list):
-    result = []
-    anagramDict = {}
+
+    anagram_dict = {}  # keys-sorted strings of letters that make up the word; values-words containing letters from key
     for word in input_list:
-        for char in word:
+        letters_sorted = ''.join(sorted(word))  # sorted() returns list of chars; ''.join() converts list back to str
+        anagram_dict.setdefault(letters_sorted, [])  # create the key if it's not found
+        anagram_dict[letters_sorted].append(word)  # append the word to appropriate list in the dict
+
+    return [v for v in anagram_dict.values()]
+
+
+print(anagrams(['eat', 'ate', 'done', 'tea', 'soup', 'node', 'latte', 'tatle']))

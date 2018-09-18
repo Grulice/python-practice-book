@@ -3,6 +3,7 @@ to tell whether the given file is a Python program file, C program file or a tex
 
 import sys
 from string import punctuation
+from string import ascii_lowercase
 
 #constants
 
@@ -16,8 +17,9 @@ def char_frequency(words):
     """
     freq = {}
     for word in words:
-        for character in word:
-            freq[character] = freq.get(character, 0) + 1
+        for character in word.lower():
+            if character in ascii_lowercase:
+                freq[character] = freq.get(character, 0) + 1
     return freq
 
 
