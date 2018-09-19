@@ -11,7 +11,7 @@ import sys
 try:
     URL = sys.argv[1]
 except IndexError:
-    URL = 'http://www.gutenberg.org/ebooks/18187.epub.images?session_id=9cda2342e1645276ff7060f3778bc85c3295ff18'
+    URL = 'http://www.bbc.com'
 
 
 urlPath = urllib.request.urlparse(URL)[2]  # strip everything up to and incl. 1 lvl domain and params
