@@ -36,6 +36,6 @@ for layer in os.walk(DIR):  # see docstrings of os.walk() to understand what it 
     # Print the name of the current folder. We swap the last padding symbol '|  ' for a folder indicator '|=='.
     for file in layer[2]:
         print("{0}|--{1}".format(padding, file))
-        # Print the padding, the file indicator |-- and the file name
+        # Print the padding, the file indicator |-- and the file name.
         # layer[2] is the list of file names in the current folder
 
