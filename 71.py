@@ -1,27 +1,16 @@
-# Problem 70: Write a program csv2xls.py that reads a csv file and exports it as Excel file. The program should
-# take two arguments. The name of the csv file to read as first argument and the name of the Excel file to write as
-# the second argument.
+# Problem 71: Create a new virtualenv and install BeautifulSoup. BeautifulSoup is very good library for parsing
+# HTML. Try using it to extract all HTML links from a webpage.
 
 import sys
 import tablib
+import urllib.request
+from bs4 import BeautifulSoup
 
-# try to get the file names from argv, switch to default if none provided
-try:
-    CSV_PATH = sys.argv[1]
-    XLS_PATH = sys.argv[2]
-except IndexError as err:
-    print(err)
-    print("CSV or Excel path not provided; using defaults...")
-    CSV_PATH = './assets/CommaSeparated.csv'
-    XLS_PATH = './assets/CommaSeparated_EXCEL.xls'
 
-data = tablib.Dataset()  # create the tablib table
+response = urllib.request.urlopen('http://www.bbc.com')
+htmlString = response.read()
 
-with open(CSV_PATH, 'r') as f:
-    csv_lines = f.readlines()  # read contents of csv file into a list
+soup = BeautifulSoup(htmlString, 'html.parser')
 
-for line in csv_lines:
-    data.append(line.split(','))  # add the rows to the tablib table as lists
-
-with open(XLS_PATH, 'wb') as f:  # data.export() returns a byte stream, file must be opened in 'wb' mode (write bytes)
-    f.write(data.export('xls'))  # export tablib table to xls and write to file
+for link in soup.find_all('a'):
+    print(link.get('href'))
